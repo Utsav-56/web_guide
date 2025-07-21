@@ -1173,19 +1173,201 @@ In simple words:
 
 # PHP Login System
 
-#### IF you want Code for simple CRUD (Create, Read, Update, Delete) operations in PHP, please check out the [PHP CRUD Operations]("https://github.com/utsav-56/web_guide/tree/main/examples/php_crud_operations") section.
+#### IF you want Code for simple CRUD (Create, Read, Update, Delete) operations in PHP, please check out the [PHP CRUD Operations]("https://github.com/Utsav-56/web_guide/tree/main/php/Crud") section.
 
 ### Signup
 
+[//]: # (![PHP code for a user signup system.]&#40;./examples/media/image26.png&#41;)
+
+```php
+<?php
+
+
+// Creating a global variable constant for database connection
+// It is same as doing $conn = mysqli_connect() 
+// but using a define allows us to use it inside other functions.
+define(__CONN, mysqli_connect("localhost", "root", "", "store"));
+
+if (!__CONN) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$message = '';
+
+function main()
+{
+    if (!isset($_POST['submit'])) {
+        return "";
+    }
+
+    // Check if all required fields are present
+    if (!isset($_POST['username']) || !isset($_POST['email']) || !isset($_POST['password'])) {
+        return "All fields are required.";
+    }
+
+    // Get the form data
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+
+    // Validate password strength
+    if (strlen($password) < 6) {
+        return "Password must be at least 6 characters long.";
+    }
+
+    // Validate email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return "Invalid email format.";
+    }
+
+    // Check if username already exists
+    $sql = "SELECT * FROM users WHERE username = '$username' OR email = '$email'";
+    $result = mysqli_query(__CONN, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        return "Username already exists. Please choose a different one.";
+    }
+
+    // Insert into database
+    $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
+    $result = mysqli_query(__CONN, $sql);
+
+    if (!$result) {
+        return "Error inserting data.";
+    }
+
+
+    return "Data inserted successfully!";
+}
+
+$message = main();
+?>
+```
+```html
+<html>
+<head><title>Signup</title></head>
+<body>
+
+<h2>Signup</h2>
+
+<form method="post" action="">
+  <label>Username:</label>
+    <input type="text" name="username" required><br>
+
+    <label>Email:</label>
+    <input type="email" name="email" required><br>
+
+    <label>Password:</label>
+    <input type="password" name="password" required><br>
+
+    <button type="submit" name="submit">Register</button>
+</form>
+
+<p><?php echo $message; ?></p>
+
+</body>
+</html>
+```
+
+Note: Both Html and php is in same file
+
+<details>
+<summary>Click to view the all in one code for Signup</summary>
+
 ![PHP code for a user signup system.](./examples/media/image26.png)
 
+</details>
 
 
 
 
 ### Login
 
+```php
+ <?php
+
+
+// Creating a global variable constant for database connection
+// It is same as doing $conn = mysqli_connect() 
+// but using a define allows us to use it inside other functions.
+define('__CONN', mysqli_connect("localhost", "root", "", "store"));
+
+if (!__CONN) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// to store message to display in  the HTML
+$message = '';
+
+function main()
+{
+    if (!isset($_POST['submit'])) {
+        return "";
+    }
+
+    // Check if all required fields are present
+    if (!isset(!isset($_POST['email']) || !isset($_POST['password'])) {
+        return "All fields are required.";
+    }
+
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+    
+    // Check if username exists
+    $sql = "SELECT * FROM users WHERE email = '$email' and password = '$password'";
+    $result = mysqli_query(__CONN, $sql);
+
+if (mysqli_num_rows($result) <= 0) {
+        return "Invalid username or email or password.";
+    }
+
+    $_SESSION['username'] = $username;
+    $_SESSION['email'] = $email;
+    header("Location: homepage.php");
+    exit();
+
+    return "Login successful.";
+
+}
+
+$message = main();
+
+?>
+```
+```html
+
+<html>
+<head>
+    <title>Login New User</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="post" action="">
+        <label>Username:</label>
+        <input type="text" name="username" required><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" required><br>
+
+        <label>Password:</label>
+        <input type="password" name="password" required><br>
+
+        <input type="submit" name="submit" value="Login">
+    </form>
+    <p><?php echo $message; ?></p>
+</body>
+</html>
+```
+
+[//]: # (![PHP code for a user login system.]&#40;./examples/media/image27.png&#41;)
+<details>
+<summary>Click to view the all in one code for Signup</summary>
+
 ![PHP code for a user login system.](./examples/media/image27.png)
+
+</details>
 
 ### Homepage
 
