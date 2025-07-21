@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Webpage Layout</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="logo">Logo</div>
+
+			<div class="navigation">Navigation</div>
+
+			<div class="header-banner">
+				Header Banner
+
+				<br /><br />
+			</div>
+
+			<div class="main-content">
+				<div class="side-bar">
+					<br /><br /><br /><br /><br />
+					Side Bar
+				</div>
+				<div class="body-area">
+					<br /><br /><br /><br /><br />
+					Body Area
+				</div>
+			</div>
+
+			<div class="footer">Footer</div>
+		</div>
+	</body>
+</html>
+<style>
+	body {
+		font-family: Arial, sans-serif;
+		margin: 20px;
+	}
+
+	.container {
+		max-width: 960px;
+		margin: 0 auto;
+		border: 2px solid black;
+	}
+
+	/* Applies border to all elements (divs) */
+	.container > * {
+		border-bottom: 2px solid black;
+	}
+
+	.logo {
+		padding: 8px;
+	}
+
+	/* Makes the navigation and footer centered */
+	.navigation,
+	.footer {
+		text-align: center;
+	}
+
+	.main-content {
+		display: flex;
+		border-bottom: 2px solid black;
+	}
+
+	.side-bar {
+		width: 25%;
+
+		/* This is to create the center border line */
+		border-right: 2px solid black;
+	}
+
+	.body-area {
+		width: 75%;
+		text-align: center;
+	}
+
+	.footer {
+		border-bottom: none; /* The last element doesn't need a bottom border */
+	}
+</style>
