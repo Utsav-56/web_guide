@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root >
+
+  <html:table>
+    <html:tr>
+      <html:td>Row 1, Cell 1</html:td>
+      <html:td>Row 1, Cell 2</html:td>
+    </html:tr>
+  </html:table>
+
+  <furniture:table>
+    <furniture:type>Dining</furniture:type>
+    <furniture:material>Wood</furniture:material>
+  </furniture:table>
+
+</root>
+
+
+
+
