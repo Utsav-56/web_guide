@@ -1,5 +1,9 @@
 <?php
 
+
+// Creating a global variable constant for database connection
+// It is same as doing $conn = mysqli_connect() 
+// but using a define allows us to use it inside other functions.
 define(__CONN, mysqli_connect("localhost", "root", "", "store"));
 
 if (!__CONN) {
@@ -19,25 +23,16 @@ function main()
         return "All fields are required.";
     }
 
+    // Get the form data
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-     if (empty($username) && empty($email) && empty($password)) {
-        return "All fields cannot be empty.";
+
+    // Validate password strength
+    if (strlen($password) < 6) {
+        return "Password must be at least 6 characters long.";
     }
-    elseif (empty($username)) {
-        return "Username cannot be empty.";
-    } elseif (empty($email)) {
-        return "Email cannot be empty.";
-    } elseif (empty($password)) {
-        return "Password cannot be empty.";
-    }
-
-
-
-
-
 
     // Validate email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {

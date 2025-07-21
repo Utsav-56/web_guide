@@ -10,6 +10,7 @@ if (!__CONN) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+// to store message to display in  the HTML
 $message = '';
 
 function main()
