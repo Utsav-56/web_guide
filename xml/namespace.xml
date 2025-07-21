@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<root >
+<root xmlns:office="officeNamespace"
+  xmlns:home="homeNamespace">
 
-  <html:table>
-    <html:tr>
-      <html:td>Row 1, Cell 1</html:td>
-      <html:td>Row 1, Cell 2</html:td>
-    </html:tr>
-  </html:table>
+  <office:table>
+    <office:tr>
+  <office:td>Row 1, Cell 1</office:td>
+  <office:td>Row 1, Cell 2</office:td>
+    </office:tr>
+  </office:table>
 
-  <furniture:table>
-    <furniture:type>Dining</furniture:type>
-    <furniture:material>Wood</furniture:material>
-  </furniture:table>
+  <home:table>
+    <home:type>Dining</home:type>
+    <home:material>Wood</home:material>
+  </home:table>
 
 </root>
-
-
-
-
